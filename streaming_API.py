@@ -1,4 +1,3 @@
-from __future__ import print_function
 import tweepy
 import json
 from pymongo import MongoClient
@@ -16,8 +15,7 @@ ACCESS_TOKEN_SECRET = "q7pNaMSXKX5bpuJYZldNjSuSAk9I3xiUMv6L8o4KtqxkB"
 class StreamListener(tweepy.StreamListener):    
 
     def on_connect(self):
-        # Called initially to connect to the Streaming API
-        print("You are now connected to the streaming API.")
+        print("Connected to the Streaming API.")
  
     def on_error(self, status_code):
         print('An Error has occured: ' + repr(status_code))
@@ -26,14 +24,12 @@ class StreamListener(tweepy.StreamListener):
     def on_data(self, data):
         try:
             client = MongoClient()
-            #database name : db
             db = client['twitterdb']
             #data stored in data_json
             data_json = json.loads(data)
             
             #Data Extraction
-            
-            # created_at = data_json['created_at']
+
             created_at = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(data_json['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))
             tweet_id = data_json['id_str']
             username = data_json['user']['screen_name']
@@ -59,7 +55,7 @@ class StreamListener(tweepy.StreamListener):
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-inp = input("Enter hashtags: ")
+inp = input("Enter hashtags separated by ',' : ")
 inp = inp.split(',')
 #Set up the listener. The 'wait_on_rate_limit=True' is needed to help with Twitter API rate limiting.
 listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True)) 

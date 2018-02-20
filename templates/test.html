@@ -1,20 +1,22 @@
 <html>
     <body>
+        Search:
         <form method = "POST" action = "/search_data">
+            <select name="search_filter">
+                    <option value="text" selected>Text</option>
+                    <option value="username">Username</option>
+                    <option value="name">Name</option>
+                    <option value="language">Language</option>
+            </select>
             <input name = "text">
             <input type = "submit">
         </form>
-        {% if flag1 != 0 %}       
-            <a href="{{next_url}}"><button type="button">Next</button></a>
-        {% endif %}
-        {% if flag2 != 0 %}       
-            <a href="{{previous_url}}"><button type="button">Previous</button></a>
-        {% endif %}
-
+        Filter date range: (yyyy-mm-dd hh:mm:ss ; yyyy-mm-dd hh:mm:ss): 
         <form method = "POST" action = '/date_filter'>
             <input name = "date_filter">
             <input type = "submit">
         </form>
+        Filter by integer parameters: (integer1 - integer2): 
         <form method = "POST" action = "/filter_count">
             <select name="filters">
                 <option value="favourites" selected>Favourites</option>
@@ -25,6 +27,7 @@
             <input name = "range_filter">
             <input type = "submit">
         </form>
+        Sort By: 
         <form method = "POST" action = "/sorted_data">
             <select name = "sorted">
                 <option value = 'favourites' selected>Favourites</option>
@@ -36,6 +39,13 @@
             </select>
             <input type = 'submit'>
         </form>
+
+        {% if flag2 != 0 %}       
+        <a href="{{previous_url}}"><button type="button">Previous</button></a>
+        {% endif %}
+        {% if flag1 != 0 %}       
+            <a href="{{next_url}}"><button type="button">Next</button></a>
+        {% endif %}
 
         <p>
             <ul>
