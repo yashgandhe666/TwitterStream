@@ -5,7 +5,6 @@ from pymongo import MongoClient
 from datetime import datetime
 import time
 
-WORDS = ['#bigdata', '#AI', '#datascience', '#machinelearning', '#ml', '#iot']
 
 CONSUMER_KEY = "OQkuCo2DgoeZJt2sOIGnTj1YX"
 CONSUMER_SECRET = "CwABj1XlhhLp4BOu4TBdVPBHPEe5w85oazKX52CgrTjEWKjmPd"
@@ -60,8 +59,10 @@ class StreamListener(tweepy.StreamListener):
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+inp = input("Enter hashtags: ")
+inp = inp.split(',')
 #Set up the listener. The 'wait_on_rate_limit=True' is needed to help with Twitter API rate limiting.
 listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True)) 
 streamer = tweepy.Stream(auth=auth, listener=listener)
-print("Tracking: " + str(WORDS))
-streamer.filter(track=WORDS)
+print("Tracking: " + str(inp))
+streamer.filter(track=inp)

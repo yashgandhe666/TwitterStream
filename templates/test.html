@@ -4,6 +4,17 @@
             <input name = "text">
             <input type = "submit">
         </form>
+        {% if flag1 != 0 %}       
+            <a href="{{next_url}}"><button type="button">Next</button></a>
+        {% endif %}
+        {% if flag2 != 0 %}       
+            <a href="{{previous_url}}"><button type="button">Previous</button></a>
+        {% endif %}
+
+        <form method = "POST" action = '/date_filter'>
+            <input name = "date_filter">
+            <input type = "submit">
+        </form>
         <form method = "POST" action = "/filter_count">
             <select name="filters">
                 <option value="favourites" selected>Favourites</option>
@@ -25,7 +36,7 @@
             </select>
             <input type = 'submit'>
         </form>
-        
+
         <p>
             <ul>
                 {% for tweet in result %}
