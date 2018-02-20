@@ -23,3 +23,6 @@ Collection: twitter_search
 ### API 2:
 `python flask_html.py` to start the server.
 http://127.0.0.1:5000/ for the home page
+
+### API 3:
+After filtering through API 2, the data gets automatically exported to export.csv
