@@ -1,0 +1,24 @@
+<html>
+    <body>
+            <p>
+                <ul>
+                    
+                    {% for tweet in result %}
+                        Tweet Created At: {{tweet.created_at}} <br>
+                        Tweet ID: {{tweet.tweet_id}} <br>
+                        Username: {{tweet.username}} <br>
+                        Name: {{tweet.name}} <br>
+                        Number of Followers: {{tweet.followers}} <br>
+                        Retweets: {{tweet.retweets}} <br>
+                        Favourites: {{tweet.favourites}} <br>
+                        Statuses: {{tweet.statuses}} <br>
+                        User Mentions: {{tweet.user_mentions}} <br>
+                        Tweet: {{tweet.text}} <br>
+                        Hashtags: {{tweet.hashtags}} <br>
+                        Language: {{tweet.language}} <br>
+                        <hr>
+                    {% endfor %}
+                </ul>
+            </p>
+    </body>
+</html>

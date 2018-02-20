@@ -1,0 +1,13 @@
+<html>
+    <body>
+            <p>
+                <ul>
+                    
+                    {% for tweet in result %}
+                        Tweet: {{tweet.text}} <br>
+                        <hr>
+                    {% endfor %}
+                </ul>
+            </p>
+    </body>
+</html>
