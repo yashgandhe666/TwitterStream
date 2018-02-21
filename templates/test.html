@@ -11,11 +11,7 @@
             <input name = "text">
             <input type = "submit">
         </form>
-        Filter date range: (yyyy-mm-dd hh:mm:ss ; yyyy-mm-dd hh:mm:ss): 
-        <form method = "POST" action = '/date_filter'>
-            <input name = "date_filter">
-            <input type = "submit">
-        </form>
+
         Filter by integer parameters: (integer1 - integer2): 
         <form method = "POST" action = "/filter_count">
             <select name="filters">
@@ -39,7 +35,23 @@
             </select>
             <input type = 'submit'>
         </form>
-
+        <form method = "POST" action = '/exact'>
+        Advanced Search:
+            <select name = "exact_choice">
+                <option value = 'start' selected>Starts With</option>
+                <option value = 'end'>Ends With</option>
+                <option value = 'exact'>Exact</option>
+            </select>
+            <select name = "parameter">
+                <option value = 'text' selected>Text</option>
+                <option value = 'username'>Username</option>
+                <option value = 'name'>Name</option>
+                <option value = 'url'>URL</option>
+            </select>
+            <input name = 'field'>
+            <input type = 'submit'>
+        </form>
+        Pagination
         {% if flag2 != 0 %}       
         <a href="{{previous_url}}"><button type="button">Previous</button></a>
         {% endif %}
@@ -50,19 +62,24 @@
         <p>
             <ul>
                 {% for tweet in result %}
-                    Tweet Created At: {{tweet.created_at}} <br>
-                    Tweet ID: {{tweet.tweet_id}} <br>
-                    Username: {{tweet.username}} <br>
-                    Name: {{tweet.name}} <br>
-                    Number of Followers: {{tweet.followers}} <br>
-                    Retweets: {{tweet.retweets}} <br>
-                    Favourites: {{tweet.favourites}} <br>
-                    Statuses: {{tweet.statuses}} <br>
-                    User Mentions: {{tweet.user_mentions}} <br>
-                    Tweet: {{tweet.text}} <br>
-                    Hashtags: {{tweet.hashtags}} <br>
-                    Language: {{tweet.language}} <br>
-                    <hr>
+                <table>
+                    <col align="left">
+                    <col align="left">
+                    <tr><td><b>Tweet Created At:</b></td>    <td>{{tweet.created_at}} </td></tr>
+                    <tr><td><b>Tweet ID:</b></td>            <td>{{tweet.tweet_id}} </td></tr>
+                    <tr><td><b>Username:</b></td>            <td>{{tweet.username}} </td></tr>
+                    <tr><td><b>Name:</b></td>                <td>{{tweet.name}} </td></tr>
+                    <tr><td><b>Number of Followers:</b></td> <td>{{tweet.followers}} </td></tr>
+                    <tr><td><b>Retweets:</b></td>            <td>{{tweet.retweets}} </td></tr>
+                    <tr><td><b>Favourites:</b></td>          <td>{{tweet.favourites}} </td></tr>
+                    <tr><td><b>Statuses:</b></td>            <td>{{tweet.statuses}} </td></tr>
+                    <tr><td><b>User Mentions:</b></td>       <td>{{tweet.user_mentions}} </td></tr>
+                    <tr><td><b>Tweet:</b></td>               <td>{{tweet.text}} </td></tr>
+                    <tr><td><b>Hashtags:</b></td>            <td>{{tweet.hashtags}} </td></tr>
+                    <tr><td><b>Language:</b></td>            <td>{{tweet.language}} </td></tr>
+                    <tr><td><b>URL:</b></td>                 <td>{{tweet.url}} </td></tr>
+                </table>
+                <hr>
                 {% endfor %}
             </ul>
         </p>

@@ -42,8 +42,9 @@ class StreamListener(tweepy.StreamListener):
             text = data_json['text']
             hashtags = [tag['text'] for tag in data_json['entities']['hashtags']]
             language = data_json['lang']
+            url = [url['expanded_url'] for url in data_json["entities"]["urls"]]
 
-            tweet = {'created_at':created_at, 'tweet_id':tweet_id, 'username':username, 'name':name, 'followers':followers, 'retweets':retweets, 'favourites':favourites, 'statuses':statuses, 'text': text, 'hashtags': hashtags, 'language' : language}
+            tweet = {'created_at':created_at, 'tweet_id':tweet_id, 'username':username, 'name':name, 'followers':followers, 'retweets':retweets, 'favourites':favourites, 'statuses':statuses, 'user_mentions':user_mentions, 'text': text, 'hashtags': hashtags, 'language' : language, 'url': url}
             #To show the tweet getting collected
             print("Tweet collected at " + str(created_at))
             

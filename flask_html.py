@@ -44,9 +44,10 @@ def pymongo_data_display():
 #Displaying search results
 @app.route('/search_data', methods = ['POST'])
 def search_data():
-    form_text=request.form["text"]
+    form_text=str(request.form["text"])
     select_list = request.form.getlist("search_filter")
     select_list = str(select_list[0])
+    print (select_list)
     # cursor = collection.find({"$or": [{'text':{'$regex':form_text}}, {'username': {'$regex':form_text}},{'name': {'$regex':form_text}},{'language': {'$regex':form_text}}]})
     cursor = collection.find({select_list: {'$regex': form_text}})
     return render_template('result.html', result = cursor)
@@ -85,14 +86,6 @@ def filter_count():
 
     return render_template('result.html', result = result)
 
-#Method for action after applying date filter
-@app.route('/date_filter', methods =['POST'])
-def date_filter():
-    int_data = request.form['date_filter'].split(';')
-    int_data = [int(y) for y in int_data]
-    cursor = collection.find({created_at:{'$gt':int_data[0], '$lt':int_data[1]}})
-    return render_template('result.html', result = cursor)
-
 # Method for sorting the data
 @app.route('/sorted_data', methods=['POST'])
 def sorted_data():
@@ -100,6 +93,21 @@ def sorted_data():
     sort = str(sort[0])
     cursor = collection.find().sort(sort)      
     return render_template('result.html', result = cursor)
+
+@app.route('/exact', methods=['POST'])
+def exact():
+    sort1 = str(request.form.getlist('exact_choice')[0])
+    sort2 = str(request.form.getlist('parameter')[0])
+    text_field = str(request.form['field'])
+
+    if sort1 == 'start':
+        cursor = collection.find({sort2:{'$regex':'^'+ text_field}})
+    elif sort1 == 'end':
+        cursor = collection.find({sort2:{'$regex': text_field+'$'}})
+    elif sort1 == 'exact':
+        cursor = collection.find({sort2:{'$regex':'^' + text_field + '$'}})
+    return render_template('result.html', result = cursor)
+
 
 if __name__ == '__main__': 
         app.run()

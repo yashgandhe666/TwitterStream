@@ -1,26 +1,27 @@
 <html>
     <body>
-            <form method = "POST" action = "/search_data">
-                <input name = "text">
-                <input type = "submit">
-            </form>
             <p>
                 <ul>
                     {% for tweet in result %}
-                    Tweet Created At: {{tweet.created_at}} <br>
-                    Tweet ID: {{tweet.tweet_id}} <br>
-                    Username: {{tweet.username}} <br>
-                    Name: {{tweet.name}} <br>
-                    Number of Followers: {{tweet.followers}} <br>
-                    Retweets: {{tweet.retweets}} <br>
-                    Favourites: {{tweet.favourites}} <br>
-                    Statuses: {{tweet.statuses}} <br>
-                    User Mentions: {{tweet.user_mentions}} <br>
-                    Tweet: {{tweet.text}} <br>
-                    Hashtags: {{tweet.hashtags}} <br>
-                    Language: {{tweet.language}} <br>
+                    <table>
+                        <col align="left">
+                        <col align="left">
+                        <tr><td><b>Tweet Created At:</b></td>    <td>{{tweet.created_at}} </td></tr>
+                        <tr><td><b>Tweet ID:</b></td>            <td>{{tweet.tweet_id}} </td></tr>
+                        <tr><td><b>Username:</b></td>            <td>{{tweet.username}} </td></tr>
+                        <tr><td><b>Name:</b></td>                <td>{{tweet.name}} </td></tr>
+                        <tr><td><b>Number of Followers:</b></td> <td>{{tweet.followers}} </td></tr>
+                        <tr><td><b>Retweets:</b></td>            <td>{{tweet.retweets}} </td></tr>
+                        <tr><td><b>Favourites:</b></td>          <td>{{tweet.favourites}} </td></tr>
+                        <tr><td><b>Statuses:</b></td>            <td>{{tweet.statuses}} </td></tr>
+                        <tr><td><b>User Mentions:</b></td>       <td>{{tweet.user_mentions}} </td></tr>
+                        <tr><td><b>Tweet:</b></td>               <td>{{tweet.text}} </td></tr>
+                        <tr><td><b>Hashtags:</b></td>            <td>{{tweet.hashtags}} </td></tr>
+                        <tr><td><b>Language:</b></td>            <td>{{tweet.language}} </td></tr>
+                        <tr><td><b>URL:</b></td>                 <td>{{tweet.url}} </td></tr>
+                    </table>
                     <hr>
-                {% endfor %}
+                    {% endfor %}
                 </ul>
             </p>
     </body>
