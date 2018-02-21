@@ -56,6 +56,7 @@ class StreamListener(tweepy.StreamListener):
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+print("Press ctrl+c to exit.")
 inp = input("Enter hashtags separated by ',' : ")
 inp = inp.split(',')
 #Set up the listener. The 'wait_on_rate_limit=True' is needed to help with Twitter API rate limiting.

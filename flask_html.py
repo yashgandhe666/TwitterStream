@@ -9,6 +9,7 @@ mongo_object = MongoClient('localhost', 27017)
 db = mongo_object['twitterdb']
 collection = db['twitter_search']
 
+#Logic of the Pagination Function
 def paginate(offset, limit, total):
     if (offset+limit) >= total:
         flag1 = 0
@@ -24,7 +25,7 @@ def paginate(offset, limit, total):
 
 @app.route('/', methods = ['GET'])
 def pymongo_data_display():
-
+    #Paginate the main page as well as display all the relevant filter categories
     offset = int(request.args.get('offset', default=0))
     limit = int(request.args.get('limit', default=10))
     starting_id = collection.find().sort('_id', 1)
@@ -33,6 +34,7 @@ def pymongo_data_display():
     result = []
     for i in cursor:
         result.append(i)
+    #generating the next and previous urls
     next_url = '/?limit=' + str(limit) +'&offset=' + str(offset+limit)
     previous_url = '/?limit=' + str(limit) +'&offset=' + str(offset-limit)
 
